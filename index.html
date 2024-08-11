@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Appointment Page</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+        :root {
+            --primary-color: #2BACBF;
+            --primary-color-dark: #0d846c;
+            --primary-color-light: #e9f7f7;
+            --secondary-color-dark: #11856d;
+            --text-dark: #333333;
+            --text-light: #767268;
+            --white: #ffffff;
+            --max-width: 1200px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f0f2f5;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.737), rgba(1, 0, 0, 0.735)), url("head.jpg");
+            color: var(--white);
+            background-position: center;
+            background-size: cover;
+            padding: 2rem 0;
+        }
+
+        .nav__container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav__logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .nav__logo span {
+            color: var(--primary-color);
+        }
+
+        .nav__links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .link a {
+            padding: 0.5rem;
+            color: var(--primary-color-light);
+            transition: color 0.3s;
+        }
+
+        .link a:hover {
+            color: var(--primary-color);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .notification .icon {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+        }
+
+        .notification:hover .icon {
+            color: var(--primary-color-dark);
+        }
+
+        .greeting {
+            color: var(--white);
+        }
+
+        .greeting h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .greeting p {
+            font-size: 0.75rem;
+        }
+
+        .profile-photo {
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .profile-photo:hover {
+            background-color: var(--primary-color);
+        }
+
+        .patient-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .header__container {
+            text-align: center;
+            margin: 2rem auto;
+            color: var(--white);
+        }
+
+        .header__container h1 {
+            font-size: 3.5rem;
+            line-height: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .header__container p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.737), rgba(1, 0, 0, 0.735)), url("head.jpg");
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .records-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .records-box {
+            margin-bottom: 20px;
+        }
+
+        .title h2 {
+            margin-top: 0;
+            display: inline;
+            color: var(--white);
+        }
+
+        .hamburger {
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary-color);
+            background: none;
+            border: none;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            transition: color 0.3s;
+        }
+
+        .hamburger:hover {
+            color: var(--primary-color-dark);
+        }
+
+        .add-new-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .add-new-btn:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        .records-list {
+            margin-top: 20px;
+        }
+
+        .record {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: var(--primary-color-light);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .record-info p {
+            margin: 0;
+        }
+
+        .record-actions button {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .edit-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .details-btn {
+            background-color: #ffc107;
+            color: #fff;
+            border-radius: 30px;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .delete-btn:hover{
+            background-color: var(--primary-color-dark);
+        }
+
+        .edit-btn:hover{
+            background-color: var(--secondary-color-dark);
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .carousel-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            /* Hide menu off-screen initially */
+            width: 300px;
+            height: 100%;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: left 0.3s ease;
+            padding: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .carousel-menu.active {
+            left: 0;
+            /* Slide in menu */
+        }
+
+        .menu-close {
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary-color);
+            background: none;
+            border: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .category {
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .category:hover {
+            background-color: #e9ecef;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .category h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .category p {
+            margin-top: 5px;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .category-content {
+            display: none;
+        }
+
+        .category.active .category-content {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav__links {
+                display: none;
+            }
+
+            .carousel-menu {
+                width: 100%;
+            }
+
+            .nav__container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav__container">
+            <div class="nav__logo">Patient<span>Tracker</span></div>
+            <nav class="nav__links">
+                <li class="link"><a href="#">Home</a></li>
+                <li class="link"><a href="#">Appointments</a></li>
+                <li class="link"><a href="#">Patients</a></li>
+                <li class="link"><a href="#">Contact</a></li>
+            </nav>
+            <div class="profile">
+                <div class="notification">
+                    <i class="bi bi-bell icon"></i>
+                </div>
+                <div class="greeting">
+                    <h1>Welcome, Dr. Smith!</h1>
+                    <p>Your dashboard overview.</p>
+                </div>
+                <div class="profile-photo">
+                    <img src="profile.webp" alt="Profile Photo" class="patient-avatar" />
+                </div>
+            </div>
+            <button class="hamburger"><i class="ri-menu-line"></i></button>
+        </div>
+    </header>
+
+    <div class="carousel-menu">
+        <button class="menu-close"><i class="ri-close-line"></i></button>
+        <div class="category" data-content="overview">
+            <i class="bi bi-house category-icon"></i>
+            <h3>Overview</h3>
+            <p>See overall statistics</p>
+            <div class="category-content">
+                <p>Here you'll find your overall statistics and recent activity.</p>
+            </div>
+        </div>
+        <div class="category" data-content="appointments">
+            <i class="bi bi-calendar category-icon"></i>
+            <h3>Appointments</h3>
+            <p>Manage patient appointments</p>
+            <div class="category-content">
+                <p>View and manage patient appointments here.</p>
+            </div>
+        </div>
+        <div class="category" data-content="patients">
+            <i class="bi bi-person category-icon"></i>
+            <h3>Patients</h3>
+            <p>View patient records</p>
+            <div class="category-content">
+                <p>Access and manage patient records and information.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="header__container">
+            <h1>Your Appointments</h1>
+            <p>Manage your upcoming and past appointments here.</p>
+        </div>
+        <button class="add-new-btn">Add New Appointment</button>
+        <div class="title">
+        <h2>Upcoming Appointments</h2>
+    </div>
+        <div class="records-section">
+            <button class="hamburger">☰</button>
+            <div class="records-box">
+                <div class="record">
+                    <div class="record-info">
+                        <p><strong>Patient Name:</strong> Patient full name</p>
+                        <p><strong>Date:</strong> 2024-08-15</p>
+                        <p><strong>Time:</strong> 10:00 AM</p>
+                    </div>
+                    <div class="record-actions">
+                        <button class="edit-btn">Details</button>
+                        <button class="details-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                </div>
+                <div class="record">
+                    <div class="record-info">
+                        <p><strong>Patient Name:</strong> Patient full name</p>
+                        <p><strong>Date:</strong> 2024-08-16</p>
+                        <p><strong>Time:</strong> 2:00 PM</p>
+                    </div>
+                    <div class="record-actions">
+                        <button class="edit-btn">Details</button>
+                        <button class="details-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                </div> 
+                    <div class="record">
+                        <div class="record-info">
+                            <p><strong>Patient Name:</strong> Patient full name</p>
+                            <p><strong>Date:</strong> 2024-08-16</p>
+                            <p><strong>Time:</strong> 2:00 PM</p>
+                        </div>
+                        <div class="record-actions">
+                            <button class="edit-btn">Details</button>
+                        <button class="details-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </div>
+                        </div> 
+                        <div class="record">
+                            <div class="record-info">
+                                <p><strong>Patient Name:</strong> Patient full name</p>
+                                <p><strong>Date:</strong> 2024-08-16</p>
+                                <p><strong>Time:</strong> 2:00 PM</p>
+                            </div>
+                            <div class="record-actions">
+                                <button class="edit-btn">Details</button>
+                                <button class="details-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.querySelector('.hamburger').addEventListener('click', function () {
+                    document.querySelector('.carousel-menu').classList.toggle('active');
+                });
+
+                document.querySelectorAll('.category').forEach(function (category) {
+                    category.addEventListener('click', function () {
+                        category.classList.toggle('active');
+                    });
+                });
+            </script>
+</body>
+
+</html>
